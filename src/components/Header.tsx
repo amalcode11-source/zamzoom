@@ -85,7 +85,7 @@ export default function Header() {
                 e.preventDefault()
                 const formData = new FormData(e.target as HTMLFormElement)
                 const query = formData.get('search') as string
-                if (query.trim()) {
+                if (query.trim() && typeof window !== 'undefined') {
                   window.location.href = `/search?q=${encodeURIComponent(query.trim())}`
                 }
               }}

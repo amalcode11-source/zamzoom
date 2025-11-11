@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, Suspense } from 'react'
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams, useRouter } from 'next/navigation'
 import { collection, getDocs, query, where } from 'firebase/firestore'
 import { db } from '../../lib/firebase'
 import ProductCard from '../../components/ProductCard'
@@ -51,10 +51,12 @@ function SearchContent() {
     fetchProducts()
   }, [q])
 
+  const router = useRouter()
+  
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
     if (searchTerm.trim()) {
-      window.location.href = `/search?q=${encodeURIComponent(searchTerm.trim())}`
+      router.push(`/search?q=${encodeURIComponent(searchTerm.trim())}`)
     }
   }
 
